@@ -2,3 +2,6 @@ get http://localhost:3000
 
 ###
 get http://localhost:3000/second
+
+###
+get https://cse341-web-services-z6lg.onrender.com
