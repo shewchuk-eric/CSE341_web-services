@@ -1,0 +1,26 @@
+{
+  "name": "cse341_web-services",
+  "version": "1.0.0",
+  "description": "course project files",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shewchuk-eric/CSE341_web-services.git"
+  },
+  "author": "Eric Shewchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shewchuk-eric/CSE341_web-services/issues"
+  },
+  "homepage": "https://github.com/shewchuk-eric/CSE341_web-services#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
