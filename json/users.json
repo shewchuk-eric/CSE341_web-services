@@ -1,0 +1,23 @@
+[
+  {
+    "firstName": "Eric",
+    "lastName": "Shewchuk",
+    "birthday": "1970-10-27",
+    "email": "eric@gardenisledivers.com",
+    "favoriteColor": "Blue"
+  },
+  {
+    "firstName": "Carrie",
+    "lastName": "Shewchuk",
+    "birthday": "1977-08-17",
+    "email": "carrieanne823@msn.com",
+    "favoriteColor": "Teal"
+  },
+  {
+    "firstName": "Avery",
+    "lastName": "Shewchuk",
+    "birthday": "2007-07-21",
+    "email": "littlebearmcspud@gmail.com",
+    "favoriteColor": "Black"
+  }
+]

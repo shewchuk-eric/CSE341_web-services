@@ -4,4 +4,10 @@ get http://localhost:3000
 get http://localhost:3000/second
 
 ###
+get http://localhost:3000/user
+
+###
+get http://localhost:3000/username
+
+###
 get https://cse341-web-services-z6lg.onrender.com
