@@ -35,17 +35,17 @@ async function insertNewUser(userData) {
 
 
 const getUser = async (req, res, next) => {
-  const result = await mongodb.getDb().db().collection('users').find({}).toArray();
-  //result.toArray().then((lists) => {
+  const result = await mongodb.getDb().db('web_services').collection('users').find({});
+  result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    res.status(200).json(lists);
     console.log('at the end of getUser');
     console.log(result);
-  //});
+  });
 };
 
 const getUsername = async (req, res, next) => {
-  const result = await mongodb.getDb().db().collection('users').find();
+  const result = await mongodb.getDb().db('web_services').collection('users').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0].firstName + ' ' + lists[0].lastName);
