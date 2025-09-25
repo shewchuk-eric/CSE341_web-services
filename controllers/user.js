@@ -1,14 +1,5 @@
 const mongodb = require('../db/connect');
 
-// FOLLOWING LINE ONLY FOR RENDER.COM - COMMENT OUT FOR LOCALHOST TESTING
-mongodb.initDb((err, mongodb) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(`Connected to DB and listening on ${port}`);
-  }
-});
-
 
 const getUser = async (req, res, next) => { // found it necessary to specify the database name and collection 
   const result = await mongodb.getDb().db('web_services').collection('users').find({});
