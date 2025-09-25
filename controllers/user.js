@@ -6,8 +6,8 @@ const getUser = async (req, res, next) => { // found it necessary to specify the
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
-    console.log('at the end of getUser');
-    console.log(result);
+    //console.log('at the end of getUser');
+    //console.log(result);
   });
 };
 
