@@ -1,40 +1,7 @@
 const mongodb = require('../db/connect');
 
-async function insertNewUser(userData) {
-  // Use a connection string from an environment variable for security
-  //const uri = process.env.MONGO_URI || "mongodb://localhost:27017/";
-  
-  //let client; // Declare client outside the try block for access in finally
-  
-  try {
-    // Establish a connection to the MongoDB server
-    client = new MongoClient(uri);
-    await client.connect();
-    
-    // Select the database and collection
-    const database = client.db('user_db');
-    const usersCollection = database.collection('users');
-    
-    // Insert the document using insertOne()
-    const result = await usersCollection.insertOne(userData);
-    
-    console.log(`Successfully inserted user with ID: ${result.insertedId}`);
-    return true;
-    
-  } catch (error) {
-    console.error(`An error occurred during insertion: ${error}`);
-    return false;
-    
-  } finally {
-    // Ensure the client connection is closed
-    if (client) {
-      await client.close();
-    }
-  }
-}
 
-
-const getUser = async (req, res, next) => {
+const getUser = async (req, res, next) => { // found it necessary to specify the database name and collection 
   const result = await mongodb.getDb().db('web_services').collection('users').find({});
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -52,4 +19,17 @@ const getUsername = async (req, res, next) => {
   });
 };
 
-module.exports = { getUser, getUsername };
+const getUserByID = async (req, res, next) => {
+  const result = await mongodb.getDb().db('web_services').collection('users').find();
+  result.toArray().then((lists) => {
+    let id = lists[2]._id; //hardcoded to get the third user in the list - would normally get from req.params
+    res.setHeader('Content-Type', 'application/json');
+    lists.forEach(element => {
+      if (element._id == id) {
+        res.status(200).json(element.firstName + ' ' + element.lastName);
+    };
+  });
+});
+}
+
+module.exports = { getUser, getUsername, getUserByID };
