@@ -1,0 +1,54 @@
+// get responses from routes.js
+get http://localhost:3000/routes/ 
+
+###
+get http://localhost:3000/routes/second
+
+###
+get http://localhost:3000/routes/third
+
+
+
+
+### list users in DB
+get http://localhost:3000/contacts/user
+
+### list a single user (currently hardcoded for ID)
+get http://localhost:3000/contacts/username
+
+### list a single user (currently hardcoded to find ID by a given user name)
+get http://localhost:3000/contacts/userID
+
+### insert new user to DB
+post http://localhost:3000/contacts/writeNewUser HTTP/1.1 content-type: application/json
+
+{
+    "firstName":"Jonny",
+    "lastName":"Rotten",
+    "email":"sexpistols@gmail.com",
+    "favoriteColor":"Gray",
+    "birthday":"1956-01-31"
+}
+
+###
+put http://localhost:3000/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 content-type: application/json
+
+{
+    "firstName":"Jonny",
+    "lastName":"Rotten",
+    "email":"sexpistols@wepunkers.com",
+    "favoriteColor":"Gray",
+    "birthday":"1956-01-31"
+}
+
+###
+delete http://localhost:3000/contacts/deleteUser/68dee6566bd1e3bce944047e
+
+
+
+
+
+###
+get https://cse341-web-services-z6lg.onrender.com
+
+

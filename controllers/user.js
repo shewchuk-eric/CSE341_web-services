@@ -1,13 +1,11 @@
 const mongodb = require('../db/connect');
-
+const ObjectId = require('mongodb').ObjectId;
 
 const getUser = async (req, res, next) => { // found it necessary to specify the database name and collection 
   const result = await mongodb.getDb().db('web_services').collection('users').find({});
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
-    //console.log('at the end of getUser');
-    //console.log(result);
   });
 };
 
@@ -30,6 +28,74 @@ const getUserByID = async (req, res, next) => {
     };
   });
 });
-}
+};
 
-module.exports = { getUser, getUsername, getUserByID };
+const writeNewUser = async (req, res, next) => {
+  const newUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
+  };
+  const response = await mongodb.getDb().db('web_services').collection('users').insertOne(newUser);
+  if (response.acknowledged) {
+    res.status(201).json(response);
+  } else {
+    res.status(500).json(response.error || 'Something went wrong.');
+  }
+};
+
+const updateUser = async (req, res, next) => {
+  const userId = { _id:req.params.id };
+  console.log(userId);
+  const updatedUser = { $set: {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
+    }
+  };
+  const response = await mongodb.getDb().db('web_services').collection('users').updateOne(userId, updatedUser);
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else  
+  res.status(500).json(response.error || 'Something went wrong.');
+};
+
+// INSTRUCTOR VERSION - NOT WORKS
+/* const updateUser = async (req, res) => {
+  const userId = new ObjectId(req.params.id);
+  // be aware of updateOne if you only want to update specific fields
+  const contact = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
+  };
+  const response = await mongodb
+    .getDb()
+    .db()
+    .collection('contacts')
+    .replaceOne({ _id: userId }, contact);
+  console.log(response);
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+  }
+}; */
+
+const deleteUser = async (req, res, next) => {
+  const userId = req.params.id;
+  const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+  res.status(500).json(response.error || `Something went wrong with id ${userId}.`);
+  }
+};
+
+module.exports = { getUser, getUsername, getUserByID, writeNewUser, updateUser, deleteUser };

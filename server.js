@@ -4,24 +4,27 @@
  * Author: Eric Shewchuk                        *
  ***********************************************/
 
-const mongodb = require('./db/connect.js'); // provide access to db (remote - MongoDB) connection functions
+const mongodb = require('./db/connect.js');
+const express = require('express');
+const app = express(); 
+const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000; 
 
-const express = require('express'); // use the 'express' built-in module - required for server and routes activity
-const app = express(); // assign the functionality of express to 'app'
-const port = process.env.PORT || 3000; // 3000 only works for localhost so check for env PORT value and use that if present (happens if remote server)
 
-app.use('/', require('./routes/routes.js')); // tells Router to go to the root and then into the routes folder to look for a file
-app.use('/', require('./routes/contacts.js'));// can specify a particular file if more than one exists in folder (...'./routes/index.js')
-
-app.listen(port, () => { // use of 'port' will look for env.PORT value and use it if present
-    console.log(`Server is running on port ${port}`); // verifies that server is running and gives port value depending on localhost or remote
-});
+app.use(bodyParser.json())
+.use(bodyParser.urlencoded({ extended: true }))
+.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+})
+.use('/', require('./routes/index.js'));
 
 
 mongodb.initDb((err, mongodb) => {
   if (err) {
     console.log(err);
   } else {
+    app.listen(port);
     console.log(`Connected to DB and listening on ${port}`);
   }
 });
