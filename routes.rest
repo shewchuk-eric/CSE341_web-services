@@ -1,37 +1,40 @@
+@base = http://localhost:3000
+@baseRemote = https://cse341-web-services-z6lg.onrender.com
+
 // get responses from routes.js
-get http://localhost:3000/routes/ 
+get {{base}}/routes/ 
 
 ###
-get http://localhost:3000/routes/second
+get {{base}}/routes/second
 
 ###
-get http://localhost:3000/routes/third
+get {{base}}/routes/third
 
 
 
 
 ### list users in DB
-get http://localhost:3000/contacts/user
+get {{base}}/contacts/user
 
 ### list a single user (currently hardcoded for ID)
-get http://localhost:3000/contacts/username
+get {{base}}/contacts/username
 
 ### list a single user (currently hardcoded to find ID by a given user name)
-get http://localhost:3000/contacts/userID
+get {{base}}/contacts/userID
 
 ### insert new user to DB
-post http://localhost:3000/contacts/writeNewUser HTTP/1.1 content-type: application/json
+post {{base}}/contacts/writeNewUser HTTP/1.1 content-type: application/json
 
 {
-    "firstName":"Jonny",
-    "lastName":"Rotten",
-    "email":"sexpistols@gmail.com",
-    "favoriteColor":"Gray",
-    "birthday":"1956-01-31"
+    "firstName":"Mark",
+    "lastName":"Adkins",
+    "email":"guttermouth@thisispunkrock.com",
+    "favoriteColor":"Yellow",
+    "birthday":"1968-10-10"
 }
 
 ###
-put http://localhost:3000/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 content-type: application/json
+put {{base}}/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 content-type: application/json
 
 {
     "firstName":"Jonny",
@@ -42,13 +45,38 @@ put http://localhost:3000/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 
 }
 
 ###
-delete http://localhost:3000/contacts/deleteUser/68dee6566bd1e3bce944047e
+delete {{base}}/contacts/deleteUser/68dee6566bd1e3bce944047e
 
 
 
-
+// REMOTE TESTS ON RENDER
 
 ###
-get https://cse341-web-services-z6lg.onrender.com
+get {{baseRemote}}
+
+### INSERT new user on Render
+post {{baseRemote}}/contacts/writeNewUser
+
+{
+    "firstName":"Mark",
+    "lastName":"Adkins",
+    "email":"guttermouth@thisispunkrock.com",
+    "favoriteColor":"Yellow",
+    "birthday":"1968-10-10"
+}
+
+### UPDATE user on Render
+put {{baseRemote}}/contacts/updateUser/68dee6566bd1e3bce944047e
+
+{
+    "firstName":"Jonny",
+    "lastName":"Rotten",
+    "email":"sexpistols@wepunkers.com",
+    "favoriteColor":"Gray",
+    "birthday":"1956-01-31"
+}
+
+### DELETE user on Render
+delete {{baseRemote}}/contacts/deleteUser/68dee6566bd1e3bce944047e
 
 

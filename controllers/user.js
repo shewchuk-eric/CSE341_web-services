@@ -31,6 +31,7 @@ const getUserByID = async (req, res, next) => {
 };
 
 const writeNewUser = async (req, res, next) => {
+  console.log(req.body.firstName);
   const newUser = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
