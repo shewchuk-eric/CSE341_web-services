@@ -47,7 +47,7 @@ const writeNewUser = async (req, res, next) => {
   }
 };
 
-const updateUser = async (req, res, next) => {
+/*const updateUser = async (req, res, next) => {
   const userId = { _id:req.params.id };
   console.log(userId);
   const updatedUser = { $set: {
@@ -63,10 +63,31 @@ const updateUser = async (req, res, next) => {
     res.status(204).send();
   } else  
   res.status(500).json(response.error || 'Something went wrong.');
+};*/
+
+/*const deleteUser = async (req, res, next) => {
+  const userId = req.params.id;
+  const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+  res.status(500).json(response.error || `Something went wrong with id ${userId}.`);
+  }
+};*/
+
+const deleteUser = async (req, res) => {
+  const userId = new ObjectId(req.params.id);
+  const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
+  console.log(response);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+  }
 };
 
 // INSTRUCTOR VERSION - NOT WORKS
-/* const updateUser = async (req, res) => {
+ const updateUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   // be aware of updateOne if you only want to update specific fields
   const contact = {
@@ -78,8 +99,8 @@ const updateUser = async (req, res, next) => {
   };
   const response = await mongodb
     .getDb()
-    .db()
-    .collection('contacts')
+    .db('web_services')
+    .collection('users')
     .replaceOne({ _id: userId }, contact);
   console.log(response);
   if (response.modifiedCount > 0) {
@@ -87,16 +108,7 @@ const updateUser = async (req, res, next) => {
   } else {
     res.status(500).json(response.error || 'Some error occurred while updating the contact.');
   }
-}; */
+}; 
 
-const deleteUser = async (req, res, next) => {
-  const userId = req.params.id;
-  const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
-  if (response.deletedCount > 0) {
-    res.status(204).send();
-  } else {
-  res.status(500).json(response.error || `Something went wrong with id ${userId}.`);
-  }
-};
 
 module.exports = { getUser, getUsername, getUserByID, writeNewUser, updateUser, deleteUser };

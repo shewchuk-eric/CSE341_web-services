@@ -12,7 +12,7 @@ get {{base}}/routes/third
 
 
 
-
+// WEEK 2 ROUTES
 ### list users in DB
 get {{base}}/contacts/user
 
@@ -22,30 +22,34 @@ get {{base}}/contacts/username
 ### list a single user (currently hardcoded to find ID by a given user name)
 get {{base}}/contacts/userID
 
+
+// WEEK 3 ROUTES
 ### insert new user to DB
-post {{base}}/contacts/writeNewUser HTTP/1.1 content-type: application/json
+post {{base}}/contacts/writeNewUser HTTP/1.1 
+content-type: application/json
 
 {
     "firstName":"Mark",
     "lastName":"Adkins",
     "email":"guttermouth@thisispunkrock.com",
-    "favoriteColor":"Yellow",
+    "favoriteColor":"Orange",
     "birthday":"1968-10-10"
 }
 
 ###
-put {{base}}/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 content-type: application/json
+put {{base}}/contacts/updateUser/68e14b5f3a66dad0a4065225 HTTP/1.1 
+content-type: application/json
 
 {
-    "firstName":"Jonny",
-    "lastName":"Rotten",
-    "email":"sexpistols@wepunkers.com",
-    "favoriteColor":"Gray",
-    "birthday":"1956-01-31"
+    "firstName":"Henry",
+    "lastName":"Rollins",
+    "email":"blackflag@thisispunkrock.com",
+    "favoriteColor":"Purple",
+    "birthday":"1961-02-13"
 }
 
 ###
-delete {{base}}/contacts/deleteUser/68dee6566bd1e3bce944047e
+delete {{base}}/contacts/deleteUser/68d4427bcb041dfaa6d6cb02 HTTP/1.1
 
 
 
@@ -77,6 +81,6 @@ put {{baseRemote}}/contacts/updateUser/68dee6566bd1e3bce944047e
 }
 
 ### DELETE user on Render
-delete {{baseRemote}}/contacts/deleteUser/68dee6566bd1e3bce944047e
+delete {{baseRemote}}/contacts/deleteUser/68d4427bcb041dfaa6d6cb02
 
 
