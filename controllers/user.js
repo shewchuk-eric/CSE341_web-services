@@ -47,34 +47,6 @@ const writeNewUser = async (req, res, next) => {
   }
 };
 
-/*const updateUser = async (req, res, next) => {
-  const userId = { _id:req.params.id };
-  console.log(userId);
-  const updatedUser = { $set: {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
-    }
-  };
-  const response = await mongodb.getDb().db('web_services').collection('users').updateOne(userId, updatedUser);
-  if (response.modifiedCount > 0) {
-    res.status(204).send();
-  } else  
-  res.status(500).json(response.error || 'Something went wrong.');
-};*/
-
-/*const deleteUser = async (req, res, next) => {
-  const userId = req.params.id;
-  const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
-  if (response.deletedCount > 0) {
-    res.status(204).send();
-  } else {
-  res.status(500).json(response.error || `Something went wrong with id ${userId}.`);
-  }
-};*/
-
 const deleteUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
@@ -86,10 +58,9 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// INSTRUCTOR VERSION - NOT WORKS
+
  const updateUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  // be aware of updateOne if you only want to update specific fields
   const contact = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,

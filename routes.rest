@@ -29,11 +29,11 @@ post {{base}}/contacts/writeNewUser HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Mark",
-    "lastName":"Adkins",
-    "email":"guttermouth@thisispunkrock.com",
+    "firstName":"Steve-O",
+    "lastName":"Jensen",
+    "email":"thevandals@wearepunkers.com",
     "favoriteColor":"Orange",
-    "birthday":"1968-10-10"
+    "birthday":"1959-04-29"
 }
 
 ###
@@ -41,15 +41,15 @@ put {{base}}/contacts/updateUser/68e14b5f3a66dad0a4065225 HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Henry",
-    "lastName":"Rollins",
-    "email":"blackflag@thisispunkrock.com",
-    "favoriteColor":"Purple",
-    "birthday":"1961-02-13"
+    "firstName":"Steven",
+    "lastName":"Jensen",
+    "email":"thevandals@wearepunkers.com",
+    "favoriteColor":"Orange",
+    "birthday":"1959-04-29"
 }
 
 ###
-delete {{base}}/contacts/deleteUser/68d4427bcb041dfaa6d6cb02 HTTP/1.1
+delete {{base}}/contacts/deleteUser/68e1ab65d25770d973affebe HTTP/1.1
 
 
 
